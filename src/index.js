@@ -1,21 +1,21 @@
-import React, { useState, useReducer, useContext } from "react";
-import ReactDOM from "react-dom";
+import React, { useState, useReducer } from 'react'
+import ReactDOM from 'react-dom'
 
-import "./styles.css";
-import appReducer from "./appReducer";
-import TodoList from "./components/TodoList";
-import TodoContext from "./context";
+import './styles.css'
+import appReducer from './appReducer'
+import TodoList from './components/TodoList'
+import TodoContext from './context'
 
 function App() {
   const [state, dispach] = useReducer(appReducer, [
-    { id: Date.now(), text: "Hello, World", completed: false }
-  ]);
-  const [text, setText] = useState("");
+    { id: Date.now(), text: 'Hello, World', completed: false }
+  ])
+  const [text, setText] = useState('')
 
   const handleAdd = () => {
-    dispach({ type: "ADD", payload: { text } });
-    setText("");
-  };
+    dispach({ type: 'ADD', payload: { text } })
+    setText('')
+  }
 
   return (
     <TodoContext.Provider value={dispach}>
@@ -24,13 +24,13 @@ function App() {
         type="text"
         value={text}
         onChange={e => setText(e.target.value)}
-        onKeyPress={({ key }) => key === "Enter" && handleAdd()}
+        onKeyPress={({ key }) => key === 'Enter' && handleAdd()}
       />
       <button onClick={handleAdd}>ADD</button>
       <TodoList todos={state} />
     </TodoContext.Provider>
-  );
+  )
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+const rootElement = document.getElementById('root')
+ReactDOM.render(<App />, rootElement)
